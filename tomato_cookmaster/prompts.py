@@ -7,7 +7,7 @@ MESSAGES=[
         },
         {
             "type": "text", 
-            "text": f"Always send the response in json format. The json will have just one dictionary consisting of two elements: 'chat' and 'model. The model element shall be a multiline string containing the model in yaml'"
+            "text": f"Always send the response in json format. The json will have just one dictionary consisting of two elements: 'chat' and 'model. The model element shall be a string containing the model in yaml. Use escaped line breaks to separate lines."
         },
         {
             "type": "text", 
@@ -32,6 +32,18 @@ MESSAGES=[
         {
             "type": "text", 
             "text": "'global parameters' that is a list and may contain 'parameter', 'linked parameter' or 'output parameter'. "
+        },
+        {
+            "type": "text", 
+            "text": "'linked parameter' has an obligatory element 'linked to' that is a string containing the name of a parameter from 'global parameters'."
+        },
+        {
+            "type": "text", 
+            "text": "'linked to' must not refer to a global parameter that is defined before the 'linked parameter'."
+        },
+        {
+            "type": "text", 
+            "text": "'linked to' must not refer to a sub-parameter of a global parameter"
         },
         {
             "type": "text", 
