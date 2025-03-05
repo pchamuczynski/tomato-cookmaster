@@ -7,7 +7,7 @@ MESSAGES=[
         },
         {
             "type": "text", 
-            "text": f"Always send the response in json format. The json will have two elements: 'chat' and 'model. The model element shall be a multiline string containing the model in yaml'"
+            "text": f"Always send the response in json format. The json will have just one dictionary consisting of two elements: 'chat' and 'model. The model element shall be a multiline string containing the model in yaml'"
         },
         {
             "type": "text", 
