@@ -26,22 +26,15 @@ def parse_response(response: str) -> tuple[str, str]:
     chat_text = ""
     yaml_code = ""
 
-    print(f"response: \n {response}")
-    # response = "\n".join([line for line in response.split("\n") if not line.startswith("`")])
-
     try:
         response = json.loads(response)
     except json.JSONDecodeError:
-        print("Response is not in json format")
-        print(response)
         return response, ""
+    
     if 'chat' in response:
         chat_text = response["chat"]
-        print(f"chat_text: {chat_text}")
     if "model" in response:
         yaml_code = response["model"]
-        #remove lines starting from `
-        print(f"yaml_code: {yaml_code}")
 
     return chat_text, yaml_code
 

@@ -6,11 +6,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "streamlit>=1.0.0",
-        "pandas>=1.0.0",
-        "numpy>=1.19.0",
-        "python-dotenv>=0.19.0",
         "openai>=0.10.5",
-        "difflib>=0.3.0",
     ],
     author="Patryk Chamuczyński",
     author_email="p.chamuczynski@gmail.com",
