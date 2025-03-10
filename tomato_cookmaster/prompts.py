@@ -69,11 +69,14 @@ MESSAGES=[
             - an expression in constraint may have  two forms: EXPR (invariant) or IF EXPR THEN EXPR (implication)
             - an invariant is a condition that must be met by the values of the parameters in generated tests
             - an implication is a condition that must be met by the values of the parameters in generated tests if the condition before 'THEN' is met
+            - implication can be used only once in a constraint
             - the syntax of EXPR is:
               a) EXPR := PARAMETER <IN|NOT IN| [CHOICE_1, CHOICE_2, ...] | PARAMETER <IS|IS NOT> CHOICE, where PARAMETER is a parameter name, CHOICE is a choice name existing in this parameter
               -- names of parameters and choices are always in single quotes
+              -- output parameters cannot be used in expressions
               -- subparameters are referenced by their full names, separated by double colons (::)
               -- choices of abstract parameters are referenced by their full names, separated by double colons (::)
+              -- choices must always be referenced by their full names, not by values and words like EMPTY, NULL etc...
               b) EXPR := NOT EXPR, where EXPR is an expression 
               c) EXPR := EXPR AND EXPR, where EXPR is an expression
               d) EXPR := EXPR OR EXPR, where EXPR is an expression
@@ -98,14 +101,18 @@ MESSAGES=[
                 - parameter: name
                     choices: [John, Jane]
                 - parameter: age
-                    choices: [young, old]
+                    choices:
+                    - choice: young
+                      choices: [kid, teenager]
+                    - choice: old
+                      choices: [adult, senior]
                 - parameter : occupation
-                    choices: [student, worker]
+                    choices: [pupil, student, worker]
               logic:
               - constraint: John is a student
                 expression: "IF 'name' IS 'John' THEN 'occupation' IS 'student'"
-              - constraint: youn people are students
-                expression: "IF 'age' IS 'young' THEN 'occupation' IS 'student'"
+              - constraint: kids are pupils
+                expression: "IF 'age' IS 'young::kid' THEN 'occupation' IS 'pupil'"
 
             - if a constraint is defined in a global parameter, it is used in all parameters linked to this global parameter
             - a constraint in a global parameter can be optionally disabled in a linking parameter, using an optional element 'constraints whitelist' or 'constraints blacklist'
